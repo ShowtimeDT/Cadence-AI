@@ -4,7 +4,7 @@
 
 ## 🚀 Vision
 
-Build an AI-first fantasy football platform that empowers **all users**—regardless of physical ability or football knowledge—to compete, strategize, and dominate their leagues. We prioritize accessibility (AAA), security, privacy, and a premium user experience with cutting-edge AI features.
+Build an AI-first fantasy football platform that empowers **all users**—regardless of physical ability or football knowledge—to compete, strategize, and dominate their leagues. We prioritize accessibility (AAA), security, privacy, and a premium user experience with cutting-edge AI features powered by GPT-5.
 
 ## ✨ Key Features
 

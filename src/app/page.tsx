@@ -1,66 +1,99 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { Button, FeatureCard } from '@/components/ui';
+import { Header } from '@/components/Header';
+import styles from './page.module.css';
 
-export default function Home() {
+/**
+ * Home page component - Landing page for Cadence fantasy football platform.
+ * Features hero section, CTA buttons, and feature showcase.
+ */
+export default function HomePage() {
   return (
-    <div className={styles.page}>
+    <>
+      <Header />
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        <HeroSection />
+        <FeaturesSection />
+        <StatusSection />
       </main>
-    </div>
+    </>
+  );
+}
+
+/**
+ * Hero section with title, subtitle, and CTA buttons
+ */
+function HeroSection() {
+  return (
+    <section className={styles.hero}>
+      <h1 className={styles.title}>
+        Cadence
+      </h1>
+      <p className={styles.subtitle}>
+        AI-powered fantasy football. Draft smarter. Manage better. Dominate your league.
+      </p>
+      <div className={styles.ctaButtons}>
+        <Button variant="primary" size="md">
+          Create League
+        </Button>
+        <Button variant="secondary" size="md">
+          Join League
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Features section showcasing key platform features
+ */
+function FeaturesSection() {
+  const features = [
+    {
+      icon: '📊',
+      title: 'Live Scoring',
+      description: 'Real-time NFL stats and fantasy points powered by Sleeper API',
+    },
+    {
+      icon: '🏆',
+      title: 'League Management',
+      description: 'Customizable scoring, drafts, and playoff brackets',
+    },
+    {
+      icon: '📱',
+      title: 'Mobile Optimized',
+      description: 'Manage your team anywhere, anytime',
+    },
+    {
+      icon: '⚡',
+      title: 'Real-Time Updates',
+      description: 'Watch your matchups unfold live on game day',
+    },
+  ];
+
+  return (
+    <section className={styles.featuresGrid}>
+      {features.map((feature, index) => (
+        <FeatureCard
+          key={feature.title}
+          icon={feature.icon}
+          title={feature.title}
+          description={feature.description}
+          delay={index * 0.1}
+        />
+      ))}
+    </section>
+  );
+}
+
+/**
+ * Status section showing development progress
+ */
+function StatusSection() {
+  return (
+    <section className={styles.status}>
+      <p className={styles.statusBadge}>
+        🚀 Currently in development - Stay tuned!
+      </p>
+    </section>
   );
 }

@@ -1,0 +1,402 @@
+/* Fantasy Football Platform - Design Tokens */
+/* Brand Colors: Sky Blue, Dark Gunmetal Grey, Black */
+/* Theme: Elegant & Upscale */
+
+:root {
+  /* ============================================================================
+     BRAND COLORS - Cyan/Sky Blue Primary (from logo)
+     ============================================================================ */
+
+  /* Cyan Blue - Primary Brand Color (extracted from logo) */
+  --color-primary-50: hsl(190, 100%, 97%);
+  --color-primary-100: hsl(190, 95%, 92%);
+  --color-primary-200: hsl(190, 90%, 85%);
+  --color-primary-300: hsl(190, 85%, 75%);
+  --color-primary-400: hsl(190, 85%, 65%);
+  /* Logo's bright cyan */
+  --color-primary-500: hsl(190, 85%, 55%);
+  /* Main cyan */
+  --color-primary-600: hsl(190, 80%, 45%);
+  --color-primary-700: hsl(190, 75%, 35%);
+  --color-primary-800: hsl(190, 70%, 25%);
+  --color-primary-900: hsl(190, 65%, 15%);
+
+  /* ============================================================================
+     DARK CHARCOAL - Sophisticated Backgrounds (from logo)
+     ============================================================================ */
+
+  --color-charcoal-50: hsl(210, 12%, 95%);
+  --color-charcoal-100: hsl(210, 12%, 90%);
+  --color-charcoal-200: hsl(210, 12%, 80%);
+  --color-charcoal-300: hsl(210, 12%, 65%);
+  --color-charcoal-400: hsl(210, 12%, 50%);
+  --color-charcoal-500: hsl(210, 15%, 35%);
+  /* Mid charcoal */
+  --color-charcoal-600: hsl(210, 18%, 25%);
+  /* Logo's dark grey */
+  --color-charcoal-700: hsl(210, 20%, 18%);
+  --color-charcoal-800: hsl(210, 22%, 12%);
+  /* Very dark - matches logo bg */
+  --color-charcoal-900: hsl(210, 24%, 8%);
+
+  /* Gunmetal kept for compatibility */
+  --color-gunmetal-50: hsl(210, 15%, 95%);
+  --color-gunmetal-100: hsl(210, 15%, 90%);
+  --color-gunmetal-200: hsl(210, 15%, 80%);
+  --color-gunmetal-300: hsl(210, 15%, 65%);
+  --color-gunmetal-400: hsl(210, 15%, 50%);
+  --color-gunmetal-500: hsl(210, 20%, 35%);
+  /* Mid gunmetal */
+  --color-gunmetal-600: hsl(210, 22%, 25%);
+  /* Dark gunmetal */
+  --color-gunmetal-700: hsl(210, 24%, 18%);
+  --color-gunmetal-800: hsl(210, 26%, 12%);
+  --color-gunmetal-900: hsl(210, 28%, 8%);
+
+  /* ============================================================================
+     BLACK & PURE NEUTRALS
+     ============================================================================ */
+
+  --color-black: hsl(0, 0%, 0%);
+  --color-white: hsl(0, 0%, 100%);
+
+  /* Neutral greys for text and borders */
+  --color-neutral-50: hsl(0, 0%, 98%);
+  --color-neutral-100: hsl(0, 0%, 95%);
+  --color-neutral-200: hsl(0, 0%, 90%);
+  --color-neutral-300: hsl(0, 0%, 80%);
+  --color-neutral-400: hsl(0, 0%, 65%);
+  --color-neutral-500: hsl(0, 0%, 50%);
+  --color-neutral-600: hsl(0, 0%, 40%);
+  --color-neutral-700: hsl(0, 0%, 30%);
+  --color-neutral-800: hsl(0, 0%, 20%);
+  --color-neutral-900: hsl(0, 0%, 10%);
+
+  /* ============================================================================
+     SEMANTIC COLORS - Muted & Sophisticated
+     ============================================================================ */
+
+  /* Success - Muted teal/cyan */
+  --color-success-light: hsl(180, 60%, 90%);
+  --color-success: hsl(180, 60%, 50%);
+  --color-success-dark: hsl(180, 60%, 35%);
+
+  /* Warning - Sophisticated amber */
+  --color-warning-light: hsl(40, 85%, 90%);
+  --color-warning: hsl(40, 85%, 60%);
+  --color-warning-dark: hsl(40, 85%, 45%);
+
+  /* Error - Muted red (not bright) */
+  --color-error-light: hsl(0, 65%, 92%);
+  --color-error: hsl(0, 65%, 65%);
+  --color-error-dark: hsl(0, 65%, 50%);
+
+  /* Info - Sky blue variant */
+  --color-info-light: hsl(200, 85%, 92%);
+  --color-info: hsl(200, 85%, 55%);
+  --color-info-dark: hsl(200, 85%, 45%);
+
+  /* ============================================================================
+     DARK MODE (Default Theme) - Matches Logo Aesthetic
+     ============================================================================ */
+
+  /* Backgrounds - Dark charcoal matching logo */
+  --bg-primary: hsl(210, 22%, 12%);
+  /* Matches logo background */
+  --bg-secondary: hsl(210, 20%, 15%);
+  /* Slightly lighter */
+  --bg-tertiary: hsl(210, 18%, 18%);
+  /* Card backgrounds */
+  --bg-elevated: hsl(210, 16%, 22%);
+  /* Elevated elements */
+  --bg-overlay: hsla(210, 24%, 8%, 0.85);
+  /* Modal overlay */
+
+  /* Glassmorphism effects */
+  --glass-bg: hsla(0, 0%, 100%, 0.05);
+  --glass-border: hsla(0, 0%, 100%, 0.1);
+  --glass-blur: 20px;
+
+  /* Alpha colors for effects (cyan from logo) */
+  --primary-glow-subtle: hsla(190, 85%, 55%, 0.08);
+  --primary-glow-moderate: hsla(190, 85%, 55%, 0.15);
+  --primary-bg-subtle: hsla(190, 85%, 55%, 0.1);
+  --primary-border-subtle: hsla(190, 85%, 55%, 0.25);
+  --primary-shadow-subtle: hsla(190, 85%, 55%, 0.2);
+
+  /* Text Colors - Pure white with opacity for hierarchy */
+  --text-primary: hsl(0, 0%, 100%);
+  /* Pure white */
+  --text-secondary: hsla(0, 0%, 100%, 0.85);
+  /* White with slight transparency */
+  --text-tertiary: hsla(0, 0%, 100%, 0.65);
+  /* White with more transparency */
+  --text-inverse: hsl(210, 28%, 8%);
+  /* Dark gunmetal for light backgrounds */
+  --text-link: var(--color-primary-400);
+  /* Sky blue for links */
+
+  /* Border Colors - Subtle elegance */
+  --border-primary: hsla(0, 0%, 100%, 0.1);
+  --border-secondary: hsla(0, 0%, 100%, 0.05);
+  --border-focus: var(--color-primary-500);
+  /* Sky blue focus */
+
+  /* ============================================================================
+     SPACING SCALE - 8px base grid
+     ============================================================================ */
+
+  --spacing-xs: 0.25rem;
+  /* 4px */
+  --spacing-sm: 0.5rem;
+  /* 8px */
+  --spacing-md: 1rem;
+  /* 16px */
+  --spacing-lg: 1.5rem;
+  /* 24px */
+  --spacing-xl: 2rem;
+  /* 32px */
+  --spacing-2xl: 3rem;
+  /* 48px */
+  --spacing-3xl: 4rem;
+  /* 64px */
+  --spacing-4xl: 6rem;
+  /* 96px */
+
+  /* ============================================================================
+     TYPOGRAPHY - Professional & Elegant
+     ============================================================================ */
+
+  /* Font Families */
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'Fira Code', 'Courier New', monospace;
+
+  /* Font Sizes - Refined scale */
+  --font-size-xs: 0.75rem;
+  /* 12px */
+  --font-size-sm: 0.875rem;
+  /* 14px */
+  --font-size-base: 1rem;
+  /* 16px */
+  --font-size-lg: 1.125rem;
+  /* 18px */
+  --font-size-xl: 1.25rem;
+  /* 20px */
+  --font-size-2xl: 1.5rem;
+  /* 24px */
+  --font-size-3xl: 1.875rem;
+  /* 30px */
+  --font-size-4xl: 2.25rem;
+  /* 36px */
+  --font-size-5xl: 3rem;
+  /* 48px */
+  --font-size-6xl: 3.75rem;
+  /* 60px */
+
+  /* Font Weights - Limited palette */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+
+  /* ============================================================================
+     BORDER RADIUS - Soft, Premium feel
+     ============================================================================ */
+
+  --radius-sm: 0.375rem;
+  /* 6px */
+  --radius-md: 0.5rem;
+  /* 8px */
+  --radius-lg: 1rem;
+  /* 16px */
+  --radius-xl: 1.5rem;
+  /* 24px */
+  --radius-2xl: 2rem;
+  /* 32px */
+  --radius-full: 9999px;
+
+  /* ============================================================================
+     SHADOWS - Soft, elevated, sophisticated
+     ============================================================================ */
+
+  /* Subtle shadows with gunmetal tint */
+  --shadow-xs: 0 1px 2px 0 hsla(210, 28%, 8%, 0.15);
+  --shadow-sm: 0 2px 4px 0 hsla(210, 28%, 8%, 0.2), 0 1px 2px -1px hsla(210, 28%, 8%, 0.2);
+  --shadow-md: 0 4px 8px -2px hsla(210, 28%, 8%, 0.25), 0 2px 4px -2px hsla(210, 28%, 8%, 0.2);
+  --shadow-lg: 0 12px 24px -4px hsla(210, 28%, 8%, 0.3), 0 4px 8px -4px hsla(210, 28%, 8%, 0.2);
+  --shadow-xl: 0 24px 48px -8px hsla(210, 28%, 8%, 0.35), 0 8px 16px -6px hsla(210, 28%, 8%, 0.25);
+  --shadow-2xl: 0 32px 64px -12px hsla(210, 28%, 8%, 0.4);
+
+  /* Sky blue glows for CTAs */
+  --shadow-primary: 0 8px 24px -4px hsla(200, 85%, 55%, 0.3);
+  --shadow-primary-lg: 0 12px 32px -4px hsla(200, 85%, 55%, 0.4);
+
+  /* ============================================================================
+     TRANSITIONS - Smooth & Elegant
+     ============================================================================ */
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0.0, 0.2, 1);
+
+  /* Easing curves */
+  --ease-in: cubic-bezier(0.4, 0.0, 1, 1);
+  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1);
+
+  /* ============================================================================
+     Z-INDEX SCALE - Layering system
+     ============================================================================ */
+
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+
+  /* ============================================================================
+     CHAT INTERFACE - Message Bubbles & Interactions
+     ============================================================================ */
+
+  /* Chat Bubble Spacing & Layout */
+  --chat-bubble-padding-vertical: 18px;
+  --chat-bubble-padding-horizontal: 24px;
+  --chat-bubble-border-radius: 18px;
+  --chat-bubble-tail-radius: 6px;
+  --chat-messages-gap: 16px;
+  --chat-messages-padding: 24px;
+  --chat-message-wrapper-gap: 6px;
+  --chat-container-max-width: 900px;
+  --chat-user-message-max-width: 600px;
+  --chat-ai-message-max-width: 85%;
+
+  /* Chat Bubble Colors - AAA WCAG 2.1 Compliant (7:1 contrast) */
+  --chat-user-bg: #2c3e50;
+  --chat-user-text: #FFFFFF; /* Pure white for maximum contrast (12.6:1) */
+  --chat-ai-bg: #1e2936;
+  --chat-ai-text: #FFFFFF; /* Pure white for maximum contrast (14.8:1) */
+  --chat-border: #2d3748;
+  --chat-border-secondary: #4a5568;
+  --chat-accent: #00E5FF; /* Brighter cyan for better visibility */
+  --chat-accent-hover: #33EEFF;
+  --chat-timestamp-color: #A0AEC0; /* Lighter gray for 7.3:1 contrast on dark bg */
+
+  /* Chat Error States - AAA Compliant */
+  --chat-error-bg: rgba(239, 68, 68, 0.15);
+  --chat-error-border: rgba(239, 68, 68, 0.4);
+  --chat-error-text: #FFC7C7; /* Lighter red for 7.1:1 contrast on dark bg */
+  --chat-error-text-secondary: #FFB3B3; /* 8.2:1 contrast */
+  --chat-error-gap: 12px;
+  --chat-error-icon-size: 24px; /* Larger for better visibility */
+  --chat-error-title-margin-bottom: 4px;
+
+  /* Chat Typography */
+  --chat-font-size-base: 15px;
+  --chat-font-size-small: 13px;
+  --chat-font-size-tiny: 11px;
+  --chat-font-size-icon: 16px;
+  --chat-font-weight-normal: 400;
+  --chat-font-weight-medium: 500;
+  --chat-font-weight-semibold: 600;
+  --chat-line-height-tight: 1.5;
+  --chat-line-height-normal: 1.6;
+
+  /* Chat Shadows */
+  --chat-shadow-user: 0 1px 2px rgba(0, 0, 0, 0.15);
+  --chat-shadow-ai: 0 1px 3px rgba(0, 0, 0, 0.25);
+  --chat-shadow-container: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+  /* Chat Copy Button - AAA Compliant (44x44px minimum) */
+  --chat-copy-button-offset: -52px; /* Adjusted for larger button */
+  --chat-copy-button-top: 8px;
+  --chat-copy-button-size: 44px; /* AAA minimum touch target */
+  --chat-copy-button-padding: 10px 12px;
+  --chat-copy-button-bg: rgba(45, 55, 72, 0.95);
+  --chat-copy-button-bg-hover: rgba(55, 65, 82, 1);
+
+  /* Chat Input Area - AAA Compliant */
+  --chat-input-area-padding: 16px;
+  --chat-input-area-gap: 12px;
+  --chat-input-bg: #1a202c;
+  --chat-input-bg-focus: #242d3c;
+  --chat-input-text: #FFFFFF; /* Pure white for AAA contrast */
+  --chat-input-placeholder: #A0AEC0; /* 7.3:1 contrast for AAA compliance */
+  --chat-input-border-radius: 24px;
+  --chat-input-padding: 16px 24px; /* Increased for better touch target */
+  --chat-input-min-height: 48px; /* Minimum touch target height */
+  --chat-input-shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  --chat-input-focus-ring: 0 0 0 4px rgba(0, 229, 255, 0.4); /* Enhanced focus indicator */
+
+  /* Chat Send Button */
+  --chat-send-button-size: 44px;
+  --chat-send-button-gradient: linear-gradient(135deg, #00D9FF 0%, #0099CC 100%);
+  --chat-send-button-gradient-hover: linear-gradient(135deg, #00E5FF 0%, #00B8E6 100%);
+  --chat-send-button-shadow: 0 2px 8px rgba(0, 217, 255, 0.3);
+  --chat-send-button-shadow-hover: 0 4px 12px rgba(0, 217, 255, 0.4);
+
+  /* Chat Loading Dots */
+  --chat-loading-gap: 6px;
+  --chat-loading-padding: 8px;
+  --chat-dot-size: 8px;
+  --chat-dot-color: #00D9FF;
+
+  /* Chat Timestamps */
+  --chat-timestamp-padding: 20px;
+
+  /* Chat Markdown */
+  --chat-markdown-paragraph-spacing: 12px;
+  --chat-markdown-list-margin: 8px 0;
+  --chat-markdown-list-item-margin: 4px 0;
+  --chat-markdown-strong-color: rgba(255, 255, 255, 0.98);
+}
+
+/* ============================================================================
+   LIGHT MODE - Optional elegant light theme
+   ============================================================================ */
+
+[data-theme="light"] {
+  /* Backgrounds - Soft, elegant whites */
+  --bg-primary: hsl(0, 0%, 100%);
+  --bg-secondary: hsl(210, 15%, 98%);
+  --bg-tertiary: hsl(210, 15%, 95%);
+  --bg-elevated: hsl(0, 0%, 100%);
+  --bg-overlay: hsla(0, 0%, 0%, 0.5);
+
+  /* Glass effects for light mode */
+  --glass-bg: hsla(0, 0%, 100%, 0.7);
+  --glass-border: hsla(210, 15%, 50%, 0.2);
+
+  /* Text Colors - Dark on light */
+  --text-primary: hsl(210, 28%, 8%);
+  --text-secondary: hsl(210, 20%, 35%);
+  --text-tertiary: hsl(210, 15%, 50%);
+  --text-inverse: hsl(0, 0%, 100%);
+  --text-link: var(--color-primary-600);
+
+  /* Borders - Subtle gunmetal */
+  --border-primary: hsl(210, 15%, 85%);
+  --border-secondary: hsl(210, 15%, 90%);
+  --border-focus: var(--color-primary-500);
+
+  /* Lighter shadows for light mode */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.12), 0 4px 8px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 24px 48px -8px rgba(0, 0, 0, 0.14), 0 8px 16px -6px rgba(0, 0, 0, 0.12);
+  --shadow-2xl: 0 32px 64px -12px rgba(0, 0, 0, 0.16);
+}

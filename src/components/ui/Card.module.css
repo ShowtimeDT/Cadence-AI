@@ -1,0 +1,19 @@
+.card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+.glassmorphism {
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.hoverable:hover {
+    transform: translateY(-8px);
+    background: hsla(0, 0%, 100%, 0.08);
+    border-color: hsla(200, 85%, 55%, 0.25);
+    box-shadow: var(--shadow-xl), 0 0 32px hsla(200, 85%, 55%, 0.15);
+}

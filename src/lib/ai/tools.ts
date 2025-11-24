@@ -33,66 +33,44 @@ export const comparePlayersTool = tool({
 });
 
 /**
- * Lineup Optimization Tool
+ * TODO: Lineup Optimization Tool (Coming Soon)
  * Optimizes a fantasy football lineup for maximum projected points
  */
-export const optimizeLineupTool = tool({
-  description: 'Optimize a fantasy football lineup to maximize projected points. Use this when users ask for lineup help or "who should I start".',
-  parameters: z.object({
-    roster: z.array(z.string()).describe('Array of player names on the roster'),
-    week: z.number().describe('NFL week number (1-18)'),
-    scoringType: z.enum(['standard', 'ppr', 'half_ppr']).optional().describe('Fantasy scoring format'),
-    positions: z.object({
-      qb: z.number().optional(),
-      rb: z.number().optional(),
-      wr: z.number().optional(),
-      te: z.number().optional(),
-      flex: z.number().optional(),
-      dst: z.number().optional(),
-      k: z.number().optional()
-    }).optional().describe('League roster settings')
-  }),
-  execute: async ({ roster, week, scoringType = 'ppr', positions }) => {
-    const { executeLineupOptimization } = await import('./tools/optimizeLineup');
-    return await executeLineupOptimization({
-      roster,
-      week,
-      scoringType,
-      positions
-    });
-  }
-});
+// export const optimizeLineupTool = tool({
+//   description: 'Optimize a fantasy football lineup to maximize projected points.',
+//   parameters: z.object({
+//     roster: z.array(z.string()).describe('Array of player names on the roster'),
+//     week: z.number().describe('NFL week number (1-18)'),
+//     scoringType: z.enum(['standard', 'ppr', 'half_ppr']).optional(),
+//   }),
+//   execute: async ({ roster, week, scoringType = 'ppr' }) => {
+//     return { error: 'Lineup optimization coming soon!' };
+//   }
+// });
 
 /**
- * Trade Analyzer Tool
+ * TODO: Trade Analyzer Tool (Coming Soon)
  * Analyzes a proposed fantasy football trade for fairness and value
  */
-export const analyzeTradeTool = tool({
-  description: 'Analyze a fantasy football trade proposal. Use this when users ask if they should accept/reject a trade or get trade advice.',
-  parameters: z.object({
-    give: z.array(z.string()).describe('Players you would give up in the trade'),
-    receive: z.array(z.string()).describe('Players you would receive in the trade'),
-    scoringType: z.enum(['standard', 'ppr', 'half_ppr']).optional().describe('Fantasy scoring format'),
-    myRoster: z.array(z.string()).optional().describe('Your current roster (for context)')
-  }),
-  execute: async ({ give, receive, scoringType = 'ppr', myRoster }) => {
-    const { executeTradeAnalysis } = await import('./tools/analyzeTrade');
-    return await executeTradeAnalysis({
-      give,
-      receive,
-      scoringType,
-      myRoster
-    });
-  }
-});
+// export const analyzeTradeTool = tool({
+//   description: 'Analyze a fantasy football trade proposal.',
+//   parameters: z.object({
+//     give: z.array(z.string()).describe('Players you would give up'),
+//     receive: z.array(z.string()).describe('Players you would receive'),
+//     scoringType: z.enum(['standard', 'ppr', 'half_ppr']).optional(),
+//   }),
+//   execute: async ({ give, receive, scoringType = 'ppr' }) => {
+//     return { error: 'Trade analysis coming soon!' };
+//   }
+// });
 
 /**
  * All available tools for the AI chat
  */
 export const fantasyTools = {
   compare_players: comparePlayersTool,
-  optimize_lineup: optimizeLineupTool,
-  analyze_trade: analyzeTradeTool
+  // optimize_lineup: optimizeLineupTool,  // Coming soon
+  // analyze_trade: analyzeTradeTool        // Coming soon
 };
 
 export type FantasyTools = typeof fantasyTools;

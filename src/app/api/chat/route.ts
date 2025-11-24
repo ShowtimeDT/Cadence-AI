@@ -33,7 +33,7 @@ export async function POST(req: Request) {
         console.log('[API] Search term after cleanup:', searchTerm);
 
         // Smart search: split into words and try different combinations
-        const words = searchTerm.split(/\s+/).filter(w => w.length > 0);
+        const words = searchTerm.split(/\s+/).filter((w: string) => w.length > 0);
         console.log('[API] Search words:', words);
         let players = null;
 

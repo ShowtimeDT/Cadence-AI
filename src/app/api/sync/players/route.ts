@@ -51,7 +51,7 @@ export async function POST() {
 
         const dbPlayers = playersList
             .filter(p => p.position) // Ensure they have a position
-            .map(p => mapSleeperPlayerToDatabase(p.player_id, p));
+            .map(p => mapSleeperPlayerToDatabase(p));
 
         // 3. Upsert in batches
         const BATCH_SIZE = 500;

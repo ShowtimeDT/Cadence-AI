@@ -148,7 +148,6 @@ Context from database:
             system: systemPrompt,
             messages: modelMessages,
             tools: fantasyTools,
-            maxSteps: 5, // Allow multi-step tool calling
         });
 
         console.log('[API] streamText result created:', !!result);

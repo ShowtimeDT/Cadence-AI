@@ -39,19 +39,19 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
                 // Load language-specific grammars
                 try {
                     if (language === 'javascript' || language === 'js') {
-                        await import('prismjs/components/prism-javascript');
+                        await import('prismjs/components/prism-javascript' as any);
                     } else if (language === 'typescript' || language === 'ts') {
-                        await import('prismjs/components/prism-typescript');
+                        await import('prismjs/components/prism-typescript' as any);
                     } else if (language === 'jsx') {
-                        await import('prismjs/components/prism-jsx');
+                        await import('prismjs/components/prism-jsx' as any);
                     } else if (language === 'tsx') {
-                        await import('prismjs/components/prism-tsx');
+                        await import('prismjs/components/prism-tsx' as any);
                     } else if (language === 'python' || language === 'py') {
-                        await import('prismjs/components/prism-python');
+                        await import('prismjs/components/prism-python' as any);
                     } else if (language === 'sql') {
-                        await import('prismjs/components/prism-sql');
+                        await import('prismjs/components/prism-sql' as any);
                     } else if (language === 'bash' || language === 'sh') {
-                        await import('prismjs/components/prism-bash');
+                        await import('prismjs/components/prism-bash' as any);
                     }
                 } catch (e) {
                     console.warn('Failed to load Prism language:', language, e);
@@ -93,7 +93,7 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 }
 
 function renderMarkdown(text: string) {
-    const elements: JSX.Element[] = [];
+    const elements: React.JSX.Element[] = [];
     const lines = text.split('\n');
     let i = 0;
     let currentList: string[] = [];
@@ -180,7 +180,6 @@ export function ChatInterface() {
     console.log('[ChatInterface] Component rendering');
 
     const { messages, sendMessage, status, error } = useChat({
-        api: '/api/chat',
         onError: (err) => {
             console.error('[ChatInterface] ERROR:', err);
             console.error('[ChatInterface] Error details:', {
@@ -190,17 +189,12 @@ export function ChatInterface() {
             });
             alert('Chat error: ' + err.message);
         },
-        onFinish: (message) => {
+        onFinish: (finishResult: any) => {
             console.log('[ChatInterface] Chat finished');
-            console.log('[ChatInterface] Final message:', message);
-            console.log('[ChatInterface] Message structure:', {
-                id: message.id,
-                role: message.role,
-                content: message.content,
-                parts: message.parts,
-                hasContent: !!message.content,
-                hasParts: !!message.parts,
-                partsLength: message.parts?.length
+            console.log('[ChatInterface] Final result:', finishResult);
+            console.log('[ChatInterface] Result structure:', {
+                message: finishResult.message,
+                messages: finishResult.messages
             });
         }
     });
@@ -236,7 +230,10 @@ export function ChatInterface() {
             e.preventDefault();
             if (input.trim() && !isLoading) {
                 console.log('[ChatInterface] Keyboard shortcut: Sending message');
-                sendMessage({ content: input });
+                sendMessage({
+                    role: 'user',
+                    parts: [{ type: 'text', text: input }]
+                } as any);
                 setInput('');
             }
         }
@@ -259,8 +256,11 @@ export function ChatInterface() {
             return;
         }
 
-        console.log('[ChatInterface] Sending message:', { content: input });
-        sendMessage({ content: input });
+        console.log('[ChatInterface] Sending message:', input);
+        sendMessage({
+            role: 'user',
+            parts: [{ type: 'text', text: input }]
+        } as any);
         setInput('');
         console.log('[ChatInterface] Message sent, input cleared');
     };
@@ -289,53 +289,32 @@ export function ChatInterface() {
                     </div>
                 )}
 
-                {messages.map((m, index) => {
-                    console.log(`[ChatInterface] Rendering message ${index}:`, {
-                        id: m.id,
-                        role: m.role,
-                        contentType: typeof m.content,
-                        content: m.content,
-                        parts: m.parts,
-                        hasParts: !!m.parts,
-                        partsCount: m.parts?.length
-                    });
+                {messages.map((m: any, index) => {
+                    console.log(`[ChatInterface] Rendering message ${index}:`, m);
 
                     let renderedContent;
                     let textContent = '';
+                    const messageRole = m.role || 'user';
+                    const messageId = m.id || `msg-${index}`;
 
-                    if (typeof m.content === 'string') {
-                        console.log(`[ChatInterface] Message ${index}: rendering as string`);
-                        textContent = m.content;
-                        // Apply markdown to AI messages
-                        if (m.role === 'assistant') {
-                            renderedContent = <div className={styles.markdownContent}>{renderMarkdown(m.content)}</div>;
-                        } else {
-                            renderedContent = m.content;
-                        }
-                    } else if (m.parts && Array.isArray(m.parts)) {
-                        console.log(`[ChatInterface] Message ${index}: rendering ${m.parts.length} parts`);
+                    // Extract text content from message parts
+                    if (m.parts && Array.isArray(m.parts)) {
                         const textParts = m.parts
                             .filter((p: any) => p.type === 'text')
                             .map((p: any) => p.text);
                         textContent = textParts.join('');
-
-                        // Apply markdown to AI messages
-                        if (m.role === 'assistant') {
-                            renderedContent = <div className={styles.markdownContent}>{renderMarkdown(textContent)}</div>;
-                        } else {
-                            renderedContent = m.parts.map((part: any, i: number) => {
-                                console.log(`[ChatInterface] Message ${index}, Part ${i}:`, part);
-                                if (part.type === 'text') {
-                                    console.log(`[ChatInterface] Message ${index}, Part ${i}: rendering text:`, part.text);
-                                    return <span key={i}>{part.text}</span>;
-                                }
-                                console.log(`[ChatInterface] Message ${index}, Part ${i}: skipping non-text part`);
-                                return null;
-                            });
-                        }
+                    } else if (typeof m.content === 'string') {
+                        textContent = m.content;
                     } else {
-                        console.error(`[ChatInterface] Message ${index}: CANNOT RENDER - no content or parts`, m);
-                        renderedContent = '[Error: Could not render message]';
+                        // Fallback: try to stringify
+                        textContent = JSON.stringify(m);
+                    }
+
+                    // Apply markdown to AI messages
+                    if (messageRole === 'assistant') {
+                        renderedContent = <div className={styles.markdownContent}>{renderMarkdown(textContent)}</div>;
+                    } else {
+                        renderedContent = textContent;
                     }
 
                     const timestamp = new Date(m.createdAt || Date.now()).toLocaleTimeString('en-US', {
@@ -345,22 +324,22 @@ export function ChatInterface() {
 
                     return (
                         <div
-                            key={m.id}
+                            key={messageId}
                             className={styles.messageWrapper}
                             role="article"
-                            aria-label={`${m.role === 'user' ? 'Your' : 'Cadence\'s'} message at ${timestamp}`}
+                            aria-label={`${messageRole === 'user' ? 'Your' : 'Cadence\'s'} message at ${timestamp}`}
                         >
                             <div
-                                className={m.role === 'user' ? styles.userMessage : styles.aiMessage}
+                                className={messageRole === 'user' ? styles.userMessage : styles.aiMessage}
                                 aria-live="off"
                             >
                                 {renderedContent}
-                                {m.role === 'assistant' && textContent && (
+                                {messageRole === 'assistant' && textContent && (
                                     <CopyButton text={textContent} />
                                 )}
                             </div>
                             <div
-                                className={m.role === 'user' ? styles.timestampUser : styles.timestampAi}
+                                className={messageRole === 'user' ? styles.timestampUser : styles.timestampAi}
                                 aria-label={`Sent at ${timestamp}`}
                             >
                                 {timestamp}

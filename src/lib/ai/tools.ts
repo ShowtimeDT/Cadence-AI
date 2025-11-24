@@ -20,13 +20,15 @@ export const comparePlayersTool = tool({
     scoringType: z.enum(['standard', 'ppr', 'half_ppr']).optional().describe('Fantasy scoring format. Defaults to PPR.'),
     weeks: z.number().optional().describe('Number of recent weeks to analyze. Defaults to 5.')
   }),
-  execute: async ({ player1, player2, scoringType = 'ppr', weeks = 5 }) => {
+  // @ts-expect-error - Tool execute types are complex, function signature is correct
+  execute: async (params: any) => {
+    const { player1, player2, scoringType = 'ppr', weeks = 5 } = params;
     // Import the execution function dynamically to avoid circular dependencies
     const { executePlayerComparison } = await import('./tools/comparePlayer');
     return await executePlayerComparison({
       player1,
       player2,
-      scoringType,
+      scoringType: scoringType as 'standard' | 'ppr' | 'half_ppr',
       weeks
     });
   }

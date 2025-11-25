@@ -39,7 +39,7 @@ function prioritizeFantasyPositions(players: any[]): any[] {
  * Search for a player by name (handles "First Last" format)
  * Prioritizes fantasy-relevant positions (QB, RB, WR, TE, K, DEF)
  */
-async function findPlayer(supabase: ReturnType<typeof createClient>, playerName: string) {
+async function findPlayer(supabase: any, playerName: string) {
   const nameParts = playerName.trim().split(/\s+/);
 
   // If we have multiple words, search by first AND last name

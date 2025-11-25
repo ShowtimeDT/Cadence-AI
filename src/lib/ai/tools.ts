@@ -1,12 +1,13 @@
 /**
  * AI Tool Definitions for Fantasy Football Platform
  *
- * These tools are used by GPT-5 to perform specific fantasy football
+ * These tools are used by GPT-4o to perform specific fantasy football
  * analysis tasks like player comparisons, lineup optimization, etc.
  */
 
 import { tool } from 'ai';
 import { z } from 'zod';
+import { executePlayerComparison } from './tools/comparePlayer';
 
 /**
  * Player Comparison Tool
@@ -17,18 +18,14 @@ export const comparePlayersTool = tool({
   parameters: z.object({
     player1: z.string().describe('First player name (e.g., "Patrick Mahomes")'),
     player2: z.string().describe('Second player name (e.g., "Josh Allen")'),
-    scoringType: z.enum(['standard', 'ppr', 'half_ppr']).optional().describe('Fantasy scoring format. Defaults to PPR.'),
-    weeks: z.number().optional().describe('Number of recent weeks to analyze. Defaults to 5.')
+    scoringType: z.enum(['standard', 'ppr', 'half_ppr']).describe('Fantasy scoring format'),
+    weeks: z.number().describe('Number of recent weeks to analyze (typically 5)')
   }),
-  // @ts-expect-error - Tool execute types are complex, function signature is correct
-  execute: async (params: any) => {
-    const { player1, player2, scoringType = 'ppr', weeks = 5 } = params;
-    // Import the execution function dynamically to avoid circular dependencies
-    const { executePlayerComparison } = await import('./tools/comparePlayer');
+  execute: async ({ player1, player2, scoringType, weeks }) => {
     return await executePlayerComparison({
       player1,
       player2,
-      scoringType: scoringType as 'standard' | 'ppr' | 'half_ppr',
+      scoringType,
       weeks
     });
   }

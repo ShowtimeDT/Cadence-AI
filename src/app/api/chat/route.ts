@@ -19,9 +19,21 @@ export async function POST(req: Request) {
         console.log('[API] Received messages count:', messages.length);
         console.log('[API] All messages:', messages);
 
-        const lastMessage = messages[messages.length - 1].content;
+        // Handle both AI SDK v5 UI format (parts) and standard format (content)
+        const lastMessageObj = messages[messages.length - 1];
+        let lastMessage: string;
+        if (lastMessageObj.parts && Array.isArray(lastMessageObj.parts)) {
+            // UI format: { role, parts: [{ type: 'text', text: '...' }] }
+            lastMessage = lastMessageObj.parts
+                .filter((p: any) => p.type === 'text')
+                .map((p: any) => p.text)
+                .join('');
+        } else {
+            // Standard format: { role, content: '...' }
+            lastMessage = lastMessageObj.content || '';
+        }
         console.log('[API] Last message content:', lastMessage);
-        console.log('[API] Last message full:', messages[messages.length - 1]);
+        console.log('[API] Last message full:', lastMessageObj);
 
         // 1. Search for players in the database based on the user's message
         const supabase = createClient(
@@ -143,11 +155,15 @@ Context from database:
 
         console.log('[API] Model messages for AI:', modelMessages);
 
+        // NOTE: Tools temporarily disabled due to AI SDK v5 + OpenAI responses API schema compatibility issues
+        // The compare_players tool works standalone (see scripts/test-compare-tool.ts)
+        // TODO: Re-enable tools once SDK schema conversion is fixed
+        // Related: https://github.com/vercel/ai/issues/7888
         const result = streamText({
             model: openai('gpt-5'),
             system: systemPrompt,
             messages: modelMessages,
-            tools: fantasyTools,
+            // tools: fantasyTools, // Disabled temporarily
         });
 
         console.log('[API] streamText result created:', !!result);

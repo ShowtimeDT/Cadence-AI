@@ -1,5 +1,8 @@
 #!/usr/bin/env tsx
 async function testChat() {
+    const query = process.argv[2] || 'Compare Patrick Mahomes vs Josh Allen';
+    console.log(`Testing chat with query: "${query}"\n`);
+
     try {
         const response = await fetch('http://localhost:3000/api/chat', {
             method: 'POST',
@@ -10,7 +13,7 @@ async function testChat() {
                 messages: [
                     {
                         role: 'user',
-                        content: 'Justin Jefferson'
+                        content: query
                     }
                 ]
             })
